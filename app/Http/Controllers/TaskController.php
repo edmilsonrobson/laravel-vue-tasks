@@ -37,7 +37,15 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request->all(), [
+            'name' => 'required|min:3|max:250'
+        ]);
+
+        Task::create([
+            'name' => $request->name,
+        ]);
+
+        return 200;
     }
 
     /**
