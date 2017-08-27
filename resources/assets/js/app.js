@@ -17,6 +17,12 @@ window.Vue = require('vue');
 
 Vue.component('example', require('./components/Example.vue'));
 
+import TodoList from './components/TodoList.vue';
+
 const app = new Vue({
-    el: '#app'
+    el: '#app',
+
+    components: {
+        TodoList
+    }
 });

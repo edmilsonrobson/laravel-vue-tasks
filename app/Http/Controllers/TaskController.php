@@ -45,7 +45,7 @@ class TaskController extends Controller
             'name' => $request->name,
         ]);
 
-        return 200;
+        return response('ok', 200);
     }
 
     /**
