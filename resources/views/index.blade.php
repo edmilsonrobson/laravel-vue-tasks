@@ -17,7 +17,7 @@
 
     <div class="container">
         <div class="section">
-            <todo-list></todo-list>
+            <todo-list isDevelopment="{{ env('APP_ENV') == 'production' }}"></todo-list>
         </div>
     </div>
 @endsection
