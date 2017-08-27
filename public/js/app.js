@@ -909,11 +909,11 @@ Vue.component('example', __webpack_require__(37));
 
 
 var app = new Vue({
-  el: '#app',
+    el: '#app',
 
-  components: {
-    TodoList: __WEBPACK_IMPORTED_MODULE_0__components_TodoList_vue___default.a
-  }
+    components: {
+        TodoList: __WEBPACK_IMPORTED_MODULE_0__components_TodoList_vue___default.a
+    }
 });
 
 /***/ }),
