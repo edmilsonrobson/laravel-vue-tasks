@@ -2,7 +2,7 @@
     <div class="box">
         <div class="field has-addons">
             <div class="control">
-                <input class="input is-large" v-model="taskInput" type="text" placeholder="Name your task...">
+                <input class="input is-large" v-model="name" type="text" placeholder="Name your task...">
             </div>
             <div class="control">
                 <a @click='addTask' class="button is-large is-info">
@@ -10,7 +10,6 @@
                 </a>
             </div>
         </div>
-        <br>
         <task-list></task-list>
     </div>
 </template>
@@ -21,24 +20,41 @@
     export default {
         props() {
             return {
-                isDevelopment: {type:Boolean, default: false},
+                isDevelopment: {type: Boolean, default: false}
             }
         },
 
         components: {
-          TaskList,
+            TaskList,
         },
 
         data() {
             return {
-                taskInput: '',
+                name: '',
             }
         },
 
         methods: {
             addTask() {
-                swal('Alright!', 'You added a new task: ' + this.taskInput, 'success');
-                this.taskInput = '';
+                axios.post('/tasks', {name: this.name})
+                    .then(response => {
+                        swal('Alright!', 'You added a new task: ' + this.name, 'success');
+                        this.name = '';
+                        this.$emit('newevent')
+                    })
+                    .catch(error => {
+                        const errorData = error.response.data;
+
+                        if (errorData) {
+                            let errorString = '';
+                            for(let prop in errorData) {
+                                errorString += errorData[prop][0] + '\n';
+                            }
+                            swal('Oops..!', errorString, 'error');
+                        } else {
+                            swal('Oops..!', 'We had an error trying to save your task. Call my programmer!\n\n' + error, 'error');
+                        }
+                    });
             }
         }
     }

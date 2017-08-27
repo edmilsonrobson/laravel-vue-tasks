@@ -12,3 +12,7 @@
 */
 
 Route::get('/', 'TaskController@index');
+Route::get('/tasks', 'TaskController@showAll');
+Route::post('/tasks', 'TaskController@store');
+Route::post('/tasks/{task}/completed', 'TaskController@setCompleted');
+Route::delete('/tasks/{task}', 'TaskController@destroy');
