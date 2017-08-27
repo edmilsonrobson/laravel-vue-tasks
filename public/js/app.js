@@ -43826,7 +43826,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "columns"
   }, [_c('div', {
     staticClass: "column is-2"
-  }, [(_vm.task.completed == '0') ? _c('div', [_c('a', {
+  }, [(_vm.task.completed == '0') ? _c('div', {
+    staticClass: "has-text-centered"
+  }, [_c('a', {
     staticClass: "button is-success",
     attrs: {
       "href": "#"

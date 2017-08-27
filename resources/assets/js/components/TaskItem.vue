@@ -2,7 +2,7 @@
     <div class="box">
         <div class="columns">
             <div class="column is-2">
-                <div v-if="task.completed == '0'">
+                <div v-if="task.completed == '0'" class="has-text-centered">
                     <a href="#" @click="completeTaskItem" class="button is-success">Done!</a>
                     <a href="#" @click="deleteTaskItem" class="button is-danger">Delete</a>
                 </div>
