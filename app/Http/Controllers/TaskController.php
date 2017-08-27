@@ -3,15 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Task;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class TaskController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         return view('index', [
@@ -35,20 +32,25 @@ class TaskController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store()
     {
-        //
+        $this->validate(request(), [
+            'name' => 'required|min:3|max:250'
+        ]);
+
+        Task::create([
+            'name' => request('name'),
+        ]);
+
+        return response('ok', 200);
     }
 
     /**
-     * Display the specified resource.
+     * Display a listing of the resource.
      *
-     * @param  \App\Task  $task
-     * @return \Illuminate\Http\Response
      */
-    public function show(Task $task)
-    {
-        //
+    public function showAll() {
+       return Task::all();
     }
 
     /**
@@ -82,6 +84,19 @@ class TaskController extends Controller
      */
     public function destroy(Task $task)
     {
-        //
+        $task->delete();
+
+        return response('ok', 200);
+    }
+
+    /**
+     * Marks a given Task as completed or not.
+     */
+    public function setCompleted(Task $task) {
+        $task->completed = request('completed');
+        $task->completed_at = Carbon::now();
+        $task->save();
+
+        return response('ok', 200);
     }
 }
